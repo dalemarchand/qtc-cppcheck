@@ -52,7 +52,8 @@ void CppcheckRunner::updateSettings()
   Q_ASSERT (settings_ != NULL);
   showOutput_ = settings_->showBinaryOutput ();
   runArguments_.clear ();
-  runArguments_ << QLatin1String ("-q");
+  if( ! showOutput_ )
+    runArguments_ << QLatin1String ("-q");
   // Pass custom params BEFORE most of runner's to shadow if some repeat.
   runArguments_ += settings_->customParameters ().split (
                      QLatin1Char (' '), QString::SkipEmptyParts);
